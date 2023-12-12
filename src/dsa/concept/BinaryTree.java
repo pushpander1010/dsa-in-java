@@ -5,10 +5,34 @@ import java.util.Scanner;
 public class BinaryTree {
 
 	public static void main(String[] args) {
-		Node root=makeTree();
-		System.out.println(root);
+		Node node=makeTree();
+		inorder(node);
+		System.out.println();
+		preorder(node);
+		System.out.println();
+		postorder(node);
 	}
 	
+	static void inorder(Node root) {
+		if(root==null)return;
+		inorder(root.left);
+		System.out.print(root.data+" ");
+		inorder(root.right);
+	}
+	
+	static void preorder(Node root) {
+		if(root==null)return;
+		System.out.print(root.data+" ");
+		inorder(root.left);
+		inorder(root.right);
+	}
+	
+	static void postorder(Node root) {
+		if(root==null)return;
+		inorder(root.left);
+		inorder(root.right);
+		System.out.print(root.data+" ");
+	}
 	static Node makeTree() {
 		Node root;
 		Scanner scan=new Scanner(System.in);
@@ -35,11 +59,8 @@ class Node{
 	}
 	@Override
 	public String toString() {
-		String out="";
-		if(this.left==null && this.right!=null)out="  "+data+"\n"+"/"+"    "+"\\"+"\n"+"Nan"+"       "+right.data;
-		else if(this.right==null && this.left!=null)out="  "+data+"\n"+"/"+"    "+"\\"+"\n"+left.data+"       "+"Nan";
-		else if(this.left==null && this.right==null)out="  "+data+"\n"+"/"+"    "+"\\"+"\n"+"Nan"+"       "+"Nan";
-		else out="  "+data+"\n"+"/"+"    "+"\\"+"\n"+left.data+"       "+right.data;
-		return out;
+		return "Node [data=" + data + ", left=" + left + ", right=" + right + "]";
 	}
+	
+	
 }
