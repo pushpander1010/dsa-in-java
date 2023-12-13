@@ -11,6 +11,8 @@ public class BinaryTree {
 		preorder(node);
 		System.out.println();
 		postorder(node);
+		System.out.println();
+		System.out.print("height :"+height(node));
 	}
 	
 	static void inorder(Node root) {
@@ -47,6 +49,12 @@ public class BinaryTree {
 		System.out.println("Enter right : ");
 		root.right=makeTree();
 		return root;
+	}
+	
+	static int height(Node root) {
+		if(root==null)return 0;
+		if(root.left==null && root.right==null)return 1;
+		return 1+Math.max(height(root.left), height(root.right));
 	}
 }
 
