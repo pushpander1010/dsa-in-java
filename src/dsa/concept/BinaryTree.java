@@ -1,5 +1,8 @@
 package dsa.concept;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class BinaryTree {
@@ -13,6 +16,8 @@ public class BinaryTree {
 		postorder(node);
 		System.out.println();
 		System.out.print("height :"+height(node));
+		System.out.println();
+		System.out.print("size :"+size(node));
 	}
 	
 	static void inorder(Node root) {
@@ -55,6 +60,29 @@ public class BinaryTree {
 		if(root==null)return 0;
 		if(root.left==null && root.right==null)return 1;
 		return 1+Math.max(height(root.left), height(root.right));
+	}
+	
+	static int size(Node node) {
+		if(node==null)return 0;
+		return 1+size(node.left)+size(node.right);
+	}
+	
+	static void leftView(Node node,ArrayList<Integer> list,int level) {
+		if(node==null)return;
+		if(list.size()==level)list.add(node.data);
+		leftView(node.left, list, level+1);
+		leftView(node.right, list, level+1);
+	}
+	
+	static void levelPrint(Node node) {
+		Queue<Node> q=new LinkedList<Node>();
+		q.offer(node);
+		while(!q.isEmpty()) {
+			Node curr=q.poll();
+			System.out.println(curr.data);
+			q.offer(node.left);
+			q.offer(node.right);
+		}
 	}
 }
 
